@@ -52,11 +52,56 @@ function TimeTrackerBody(){
     </>
 }
 
+
+function TimeTrackerControls(){
+    const hours = Array.from(Array(24).keys())
+    const minutes = ['00-15', '15-30', '30-45', '45-00']
+
+    return <div className={"flex flex-row justify-evenly w-full"}>
+            <span>
+                <input className={"p-3 bg-inherit border border-gray-800 rounded focus-visible:border" +
+                    " focus-visible:border-gray-800"} placeholder={"Task"} />
+            </span>
+        <div className={"flex flex-row gap-3"}>
+            <div className={"flex gap-1 flex-row items-center"}>
+                <label>Hour</label>
+                <select className={"p-3 bg-inherit border border-gray-800 rounded focus-visible:border" +
+                    " focus-visible:border-gray-800"}>
+                    {
+                        hours.map(h => {
+                            return <option key={h} value={h}>{h}</option>
+                        })
+                    }
+                </select>
+            </div>
+            <div className={"flex gap-1 flex-row items-center"}>
+                <label>Minutes</label>
+                <select className={"p-3 bg-inherit border border-gray-800 rounded focus-visible:border" +
+                    " focus-visible:border-gray-800"}>
+                    {
+                        minutes.map(h => {
+                            return <option key={h} value={h}>{h}</option>
+                        })
+                    }
+                </select>
+            </div>
+        </div>
+        <span>
+                <select value={0} className={"p-3 bg-inherit border border-gray-800 rounded focus-visible:border" +
+                    " focus-visible:border-gray-800"}>
+                    <option value={0} disabled={true}>Color</option>
+                    <option>Red</option>
+                </select>
+            </span>
+
+    </div>
+}
+
 export default function App() {
-    return <div className={"flex flex-col justify-center items-center p-3"}>
+    return <div className={"flex flex-col justify-center items-center p-3 gap-4"}>
         <h1 className={"text-3xl font-bold"}>Clocker</h1>
         <div>
-            <table className={"border"}>
+            <table className={"table border"}>
                 <thead>
                     <HeadingRow/>
                 </thead>
@@ -65,5 +110,6 @@ export default function App() {
                 </tbody>
             </table>
         </div>
+        <TimeTrackerControls/>
     </div>
 }
