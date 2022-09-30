@@ -70,24 +70,37 @@ function TimeSelector() {
 
 function TimeTrackerControls() {
 
+    const submit = () => {
+        alert("Submitting!")
+    }
+
+    const cancel = () => {
+        alert("Clearing")
+    }
+
     return <>
-        <div className={"flex flex-row justify-evenly w-full"}>
-            <span>
+        <div className={"flex flex-row justify-evenly w-full items-start"}>
+            <div>
                 <input
-                    className={"p-3 bg-inherit border border-gray-800 rounded focus-visible:border" +
-                        " focus-visible:border-gray-800"}
+                    className={"p-3 bg-inherit border border-gray-800 rounded focus-visible:border" + " focus-visible:border-gray-800"}
                     placeholder={"Task"}/>
-            </span>
+            </div>
             <TimeSelector/>
-            <span>
+            <div>
                 <select value={0}
-                        className={"p-3 bg-inherit border border-gray-800 rounded focus-visible:border" +
-                            " focus-visible:border-gray-800"}>
+                        className={"p-3 bg-inherit border border-gray-800 rounded focus-visible:border" + " focus-visible:border-gray-800"}>
                     <option value={0} disabled={true}>Color</option>
                     <option>Red</option>
                 </select>
-            </span>
-
+            </div>
+            <div className={"flex flex-col gap-2"}>
+                <button className={"border p-3 border-gray-200 shadow text-blue-600 uppercase text-sm rounded"}
+                        onClick={submit}>Save
+                </button>
+                <button className={"border p-3 border-gray-200 shadow text-red-600 uppercase text-sm rounded"}
+                        onClick={cancel}>Cancel
+                </button>
+            </div>
         </div>
     </>
 }
