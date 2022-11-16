@@ -1,4 +1,8 @@
 import {ReactNode} from "react";
+import DateTimeSelection from "./DateTimeSelection";
+import TextField from "@mui/material/TextField";
+import Scheduler from "./Scheduler";
+import Grid from "@mui/material/Grid";
 
 const TableItem = (props: { children?: ReactNode }) => {
     return <td className={"border w-20 text-center"}>
@@ -78,46 +82,42 @@ function TimeTrackerControls() {
         alert("Clearing")
     }
 
-    return <>
-        <div className={"flex flex-row justify-evenly w-full items-start"}>
-            <div>
-                <input
-                    className={"p-3 bg-inherit border border-gray-800 rounded focus-visible:border" + " focus-visible:border-gray-800"}
-                    placeholder={"Task"}/>
-            </div>
-            <TimeSelector/>
-            <div>
-                <select value={0}
-                        className={"p-3 bg-inherit border border-gray-800 rounded focus-visible:border" + " focus-visible:border-gray-800"}>
-                    <option value={0} disabled={true}>Color</option>
-                    <option>Red</option>
-                </select>
-            </div>
-            <div className={"flex flex-col gap-2"}>
-                <button className={"border p-3 border-gray-200 shadow text-blue-600 uppercase text-sm rounded"}
-                        onClick={submit}>Save
-                </button>
-                <button className={"border p-3 border-gray-200 shadow text-red-600 uppercase text-sm rounded"}
-                        onClick={cancel}>Cancel
-                </button>
-            </div>
-        </div>
-    </>
+    return <Grid container direction={"column"} gap={2} padding={2} alignContent={"center"}>
+        <Grid>
+            <TextField label={"Task"}/></Grid>
+        {/*<TimeSelector/>*/}
+        <Grid>
+            <select value={0}
+                    className={"p-3 bg-inherit border border-gray-800 rounded focus-visible:border" + " focus-visible:border-gray-800"}>
+                <option value={0} disabled={true}>Color</option>
+                <option>Red</option>
+            </select>
+        </Grid>
+        <Grid>
+            <DateTimeSelection label={"Start"}/>
+        </Grid>
+        <Grid>
+            <DateTimeSelection label={"End"}/>
+        </Grid>
+        <Grid container gap={1}>
+            <button className={"border p-3 border-gray-200 shadow text-blue-600 uppercase text-sm rounded"}
+                    onClick={submit}>Save
+            </button>
+            <button className={"border p-3 border-gray-200 shadow text-red-600 uppercase text-sm rounded"}
+                    onClick={cancel}>Cancel
+            </button>
+        </Grid>
+    </Grid>
 }
 
 export default function App() {
-    return <div className={"flex flex-col justify-center items-center p-3 gap-4"}>
-        <h1 className={"text-3xl font-bold"}>Clocker</h1>
-        <div>
-            <table className={"table border"}>
-                <thead>
-                <HeadingRow/>
-                </thead>
-                <tbody>
-                <TimeTrackerBody/>
-                </tbody>
-            </table>
-        </div>
-        <TimeTrackerControls/>
-    </div>
+    return <Grid container direction={"row"} gap={3}>
+        {/*<h1 className={"text-3xl font-bold"}>Clocker</h1>*/}
+        <Grid sm={8}>
+            <Scheduler/>
+        </Grid>
+        <Grid sm={3}>
+            <TimeTrackerControls/>
+        </Grid>
+    </Grid>
 }
