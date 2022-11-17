@@ -1,15 +1,15 @@
-import { useState} from "react";
+import {useState} from "react";
 import TimeSheet from "./Scheduler";
 import Grid from "@mui/material/Grid";
 import TimeTrackerControls from "./Controls";
 import useEvents, {UserEvents} from "./hooks/useEvents";
 
 export default function App() {
-    const [event, setEvent] = useState<UserEvents>({startDate:"", endDate: "", title: ""})
+    const [event, setEvent] = useState<UserEvents>({startDate: "", endDate: "", title: ""})
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEvent(s => ({...s, [e.target.name]: e.target.value}))
     }
-    const [schedulerData] = useEvents()
+    const {events: schedulerData, setEvents: setSchedulerData} = useEvents()
     return <Grid container direction={"row"} gap={3}>
         <Grid sm={8}>
             <TimeSheet events={schedulerData}/>

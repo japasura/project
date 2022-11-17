@@ -37,5 +37,5 @@ export default function useEvents(){
 
         })
     }, [])
-    return [events]
+    return {events, setEvents}
 }
