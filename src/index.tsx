@@ -7,7 +7,7 @@ import Login from "./login";
 import useAuthToken from "./hooks/useAuthToken";
 import Typography from "@mui/material/Typography";
 
-export const host = "http://122.166.189.206/"
+export const host = "http://localhost:8080"
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement

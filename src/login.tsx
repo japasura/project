@@ -44,10 +44,10 @@ export default function Login(props: {authToken: string}) {
                     <Button onClick={onSubmit_1}>Login</Button>
                 </Grid>
                 <Grid>
-                    <TextField label={"Username"} name={"username_2"} onChange={onChange_2}/>
+                    <TextField label={"Username"} name={"username"} onChange={onChange_2}/>
                 </Grid>
                 <Grid>
-                    <TextField label={"Password"} name={"password_2"} onChange={onChange_2}/>
+                    <TextField label={"Password"} name={"password"} onChange={onChange_2}/>
                 </Grid>
                 <Grid>
                     <Button onClick={onSubmit_2} >Create Account</Button>
