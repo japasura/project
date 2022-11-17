@@ -1,7 +1,7 @@
 import TextField from "@mui/material/TextField";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import {Button} from "@mui/material"
+import {Button, Box} from "@mui/material"
 import {useState} from "react";
 import useLogin from "./hooks/useLogin";
 import useCreateAccount from "./hooks/useCreateAccount";
@@ -31,23 +31,28 @@ export default function Login(props: {authToken: string}) {
         })
     }
 
-    return <Paper>
-        <Grid container direction={"column"} gap={2} spacing={2}>
-            <Grid>
-                <TextField label={"Username"} name={"username_1"} onChange={onChange_1}/>
+    return <Box p={2}>
+        <Paper >
+            <Grid container direction={"column"} alignItems={"center"} gap={2} p={2}>
+                <Grid>
+                    <TextField label={"Username"} name={"username"} onChange={onChange_1}/>
+                </Grid>
+                <Grid>
+                    <TextField label={"Password"} name={"password"} onChange={onChange_1}/>
+                </Grid>
+                <Grid>
+                    <Button onClick={onSubmit_1}>Login</Button>
+                </Grid>
+                <Grid>
+                    <TextField label={"Username"} name={"username_2"} onChange={onChange_2}/>
+                </Grid>
+                <Grid>
+                    <TextField label={"Password"} name={"password_2"} onChange={onChange_2}/>
+                </Grid>
+                <Grid>
+                    <Button onClick={onSubmit_2} >Create Account</Button>
+                </Grid>
             </Grid>
-            <Grid>
-                <TextField label={"Password"} name={"password_1"} onChange={onChange_1}/>
-            </Grid>
-            <Button onClick={onSubmit_1}>Login</Button>
-            <Grid>
-                <TextField label={"Username"} name={"username_2"} onChange={onChange_2}/>
-            </Grid>
-            <Grid>
-                <TextField label={"Password"} name={"password_2"} onChange={onChange_2}/>
-            </Grid>
-            <Button onClick={onSubmit_2} >Create Account</Button>
-
-        </Grid>
-    </Paper>
+        </Paper>
+    </Box>
 }
