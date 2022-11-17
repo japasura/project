@@ -2,7 +2,7 @@
   "name": "mp-1",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://japasura.github.io/wireframe",
+  "homepage": "/",
   "dependencies": {
     "@devexpress/dx-react-core": "^3.0.6",
     "@devexpress/dx-react-scheduler": "^3.0.6",
