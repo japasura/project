@@ -7,16 +7,20 @@ export interface UserEvents {
     title: string
 }
 
-interface ApiUserEvents {
+export interface ApiUserEvents {
     start_time: number,
     end_time: number,
     type: string
 }
 
+export function getDateString(date: Date) {
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+}
+
 export default function useEvents(authToken: string){
     const [events, setEvents] = useState<Array<UserEvents>>([])
     const date = new Date()
-    const d_str = `${date.getFullYear()}-${date.getMonth() +1}-${11}`
+    const d_str = getDateString(date);
     console.log()
     useEffect(()=> {
         fetch(host+"/dayData/" + d_str + "/events", {headers: {"Api-Key": authToken}}).then(resp => {
