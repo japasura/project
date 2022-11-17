@@ -12,13 +12,13 @@ interface ApiUserEvents {
     type: string
 }
 
-export default function useEvents(){
+export default function useEvents(authToken: string){
     const [events, setEvents] = useState<Array<UserEvents>>([])
     const date = new Date()
     const d_str = `${date.getFullYear()}-${date.getMonth() +1}-${11}`
     console.log()
     useEffect(()=> {
-        fetch("http://122.166.189.206/dayData/" + d_str + "/events", {headers: {"Api-Key": "hi"}}).then(resp => {
+        fetch("http://122.166.189.206/dayData/" + d_str + "/events", {headers: {"Api-Key": authToken}}).then(resp => {
             if (resp.ok){
                 resp.json().then((j: Array<ApiUserEvents>) => {
                     const sv: Array<UserEvents> = j.map(s => {
