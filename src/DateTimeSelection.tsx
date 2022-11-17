@@ -14,7 +14,6 @@ export default function DateTimeSelection({label}: {label: string}) {
         dayjs('2014-08-18T21:11:54'),
     );
 
-
     const handleChange = (newValue: Dayjs | null) => {
         setValue(newValue);
     };
@@ -35,7 +34,7 @@ export default function DateTimeSelection({label}: {label: string}) {
                     label="Time"
                     value={value}
                     onChange={handleChange}
-                    renderInput={(params: JSX.IntrinsicAttributes) => <TextField {...params} />}
+                    renderInput={(params: JSX.IntrinsicAttributes) => <TextField {...params}/>}
                 />
             </Grid>
         </LocalizationProvider>
