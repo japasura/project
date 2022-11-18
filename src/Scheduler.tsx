@@ -6,7 +6,7 @@ import {getDateString, UserEvents} from "./hooks/useEvents";
 
 export default function TimeSheet({events}: {events: Array<UserEvents> }) {
     console.log(events)
-    return <Paper sx={{p: 2}}>
+    return <Paper sx={{p: 2, overflowY: "scroll", maxHeight: "100vh"}}>
         <Scheduler data={events}>
             <ViewState currentDate={getDateString(new Date())}/>
             <DayView startDayHour={6} endDayHour={22}/>

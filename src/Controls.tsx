@@ -1,5 +1,5 @@
 import Grid from "@mui/material/Grid";
-import {Button, Container, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent} from "@mui/material"
+import {Box, Button, Container, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent} from "@mui/material"
 import DateTimeSelection from "./DateTimeSelection";
 import {Dispatch, SetStateAction, useState} from "react";
 import dayjs, {Dayjs} from "dayjs";
@@ -31,33 +31,35 @@ export default function TimeTrackerControls({setEvents}: { setEvents: Dispatch<S
         })
     }
 
-    return <Container maxWidth={"xs"}>
-        <Grid container direction={"column"} gap={2} padding={2} alignItems={"center"}>
-            <Grid width={"100%"}>
-                <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">Task</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        label="Age"
-                        value={taskType}
-                        onChange={changeTaskType}
-                    >
-                        <MenuItem value={"sleep"}>Sleep</MenuItem>
-                        <MenuItem value={"food"}>Food</MenuItem>
-                    </Select>
-                </FormControl>
+    return <Box sx={{position: "sticky"}}>
+        <Container maxWidth={"xs"}>
+            <Grid container direction={"column"} gap={2} padding={2} alignItems={"center"}>
+                <Grid width={"100%"}>
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Task</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            label="Age"
+                            value={taskType}
+                            onChange={changeTaskType}
+                        >
+                            <MenuItem value={"sleep"}>Sleep</MenuItem>
+                            <MenuItem value={"food"}>Food</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Grid>
+                <Grid>
+                    <DateTimeSelection value={t1} setValue={setT1} label={"Start"}/>
+                </Grid>
+                <Grid>
+                    <DateTimeSelection value={t2} setValue={setT2} label={"End"}/>
+                </Grid>
+                <Grid container gap={1} justifyContent={"space-around"}>
+                    <Button color={"secondary"} onClick={cancel}>Reset</Button>
+                    <Button color={"primary"} onClick={submit} variant={"contained"}>Save</Button>
+                </Grid>
             </Grid>
-            <Grid>
-                <DateTimeSelection value={t1} setValue={setT1} label={"Start"}/>
-            </Grid>
-            <Grid>
-                <DateTimeSelection value={t2} setValue={setT2} label={"End"}/>
-            </Grid>
-            <Grid container gap={1} justifyContent={"space-around"}>
-                <Button color={"secondary"} onClick={cancel}>Reset</Button>
-                <Button color={"primary"} onClick={submit} variant={"contained"}>Save</Button>
-            </Grid>
-        </Grid>
-    </Container>
+        </Container>
+    </Box>
 }
