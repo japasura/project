@@ -4,6 +4,7 @@ import {Appointments, DayView, Scheduler,} from '@devexpress/dx-react-scheduler-
 import {getDateString, UserEvents} from "./hooks/useEvents";
 import {ViewState} from "@devexpress/dx-react-scheduler";
 import AppointmentProps = Appointments.AppointmentProps;
+import {useState} from "react";
 
 const bgColors = new Map()
 bgColors.set("sleep", "#C45AB3")
@@ -23,9 +24,18 @@ const StyledAppointmentHOC = (onDoubleClick: () => void) => {
 
 
 export default function TimeSheet({events, onDoubleClick}: { events: Array<UserEvents>, onDoubleClick: () => void }) {
+    // const handleChange = (newValue: Dayjs | null) => {
+    //     setValue(newValue);
+    // };
+    const [date, setDate] = useState({curdate: getDateString(new Date())})
+
     return <Paper sx={{p: 2, overflowY: "scroll", maxHeight: "100vh"}}>
         <Scheduler data={events}>
-            <ViewState currentDate={getDateString(new Date())}/>
+            {/*<DateNavigator navigationButtonComponent={}/>*/}
+            {/*<Date*/}
+            {/*<TodayButton buttonComponent={}/>*/}
+            {/*<DateNavigator rootComponent={undefined} overlayComponent={undefined} openButtonComponent={undefined} navigationButtonComponent={undefined}/>*/}
+            <ViewState currentDate={date.curdate}/>
             <DayView startDayHour={6} endDayHour={22}/>
             <Appointments appointmentComponent={StyledAppointmentHOC(onDoubleClick)}/>
         </Scheduler>

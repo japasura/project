@@ -6,6 +6,10 @@ import useEvents from "./hooks/useEvents";
 import useSetEvents from "./hooks/useSetEvents";
 
 export default function App(props: { authToken: string }) {
+    if (props.authToken === null) {
+        return null
+    }
+
     const {events: schedulerData, setEvents: setSchedulerData} = useEvents(props.authToken)
     const updateEvents = useSetEvents(props.authToken)
     useEffect(() => {

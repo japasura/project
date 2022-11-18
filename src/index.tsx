@@ -16,14 +16,14 @@ const root = ReactDOM.createRoot(
 const Index = () => {
     const authToken = useAuthToken()
     if (!authToken) {
-        return <Typography>!</Typography>
+        return <Typography variant={"h5"}>Server down! Visit again!</Typography>
     }
 
     return <React.StrictMode>
         <BrowserRouter>
             <Routes>
-                <Route path={"/"} element={<Login authToken={authToken as string}/>}/>
-                <Route path={"/dash"} element={<App authToken={authToken}/>}/>
+                <Route path={"/"} element={<Login authToken={authToken}/>}/>
+                <Route path={"/dashboard"} element={<App authToken={authToken}/>}/>
             </Routes>
         </BrowserRouter>
     </React.StrictMode>
