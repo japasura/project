@@ -23,7 +23,7 @@ const Index = () => {
         <BrowserRouter>
             <Routes>
                 <Route path={"/"} element={<Login authToken={authToken as string}/>}/>
-                <Route path={"dash"} element={<App authToken={authToken}/>}/>
+                <Route path={"/dash"} element={<App authToken={authToken}/>}/>
             </Routes>
         </BrowserRouter>
     </React.StrictMode>

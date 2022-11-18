@@ -45,7 +45,10 @@ export default function TimeTrackerControls({setEvents}: { setEvents: Dispatch<S
                             onChange={changeTaskType}
                         >
                             <MenuItem value={"sleep"}>Sleep</MenuItem>
-                            <MenuItem value={"food"}>Food</MenuItem>
+                            <MenuItem value={"daily-activities"}>Food/Daily Activities</MenuItem>
+                            <MenuItem value={"class"}>Class</MenuItem>
+                            <MenuItem value={"relaxing"}>Relaxing</MenuItem>
+                            <MenuItem value={"study"}>Studying</MenuItem>
                         </Select>
                     </FormControl>
                 </Grid>
