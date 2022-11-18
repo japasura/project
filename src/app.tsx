@@ -16,16 +16,15 @@ export default function App(props: { authToken: string }) {
         updateEvents(schedulerData)
     }, [schedulerData])
 
-    const onDoubleClick = () => {
-
-    }
 
     return <Grid container direction={"row"} gap={3}>
         <Grid sm={8}>
-            <TimeSheet events={schedulerData} onDoubleClick={onDoubleClick}/>
+            <TimeSheet events={schedulerData} setEvents={setSchedulerData}/>
         </Grid>
         <Grid sm={3}>
             <TimeTrackerControls setEvents={setSchedulerData}/>
         </Grid>
+
+
     </Grid>
 }
