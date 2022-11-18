@@ -22,13 +22,18 @@ export default function TimeTrackerControls({setEvents}: { setEvents: Dispatch<S
     }
 
     const submit = () => {
-        setEvents(e => {
+        if(dayjs(t2)>dayjs())
+            alert("Time travel not possible")
+        else if(dayjs(t1)<dayjs(t2))
+            setEvents(e => {
             return [...e, {
                 startDate: t1?.toISOString() as string,
                 endDate: t2?.toISOString() as string,
                 title: taskType
             }]
         })
+        else
+            alert("To succeed you must start (End time lesser than start time)")
     }
 
     return <Box sx={{position: "sticky"}}>
@@ -43,12 +48,13 @@ export default function TimeTrackerControls({setEvents}: { setEvents: Dispatch<S
                             label="Age"
                             value={taskType}
                             onChange={changeTaskType}
+                            defaultValue={"select task"}
                         >
-                            <MenuItem value={"sleep"}>Sleep</MenuItem>
-                            <MenuItem value={"daily-activities"}>Food/Daily Activities</MenuItem>
-                            <MenuItem value={"class"}>Class</MenuItem>
-                            <MenuItem value={"relaxing"}>Relaxing</MenuItem>
-                            <MenuItem value={"study"}>Studying</MenuItem>
+                            <MenuItem value={"Sleep"}>Sleep</MenuItem>
+                            <MenuItem value={"Food/Daily Activities"}>Food/Daily Activities</MenuItem>
+                            <MenuItem value={"Class"}>Class</MenuItem>
+                            <MenuItem value={"Relaxing"}>Relaxing</MenuItem>
+                            <MenuItem value={"Studying"}>Studying</MenuItem>
                         </Select>
                     </FormControl>
                 </Grid>

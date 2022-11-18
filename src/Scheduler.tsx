@@ -10,11 +10,11 @@ import {Button, Dialog} from "@mui/material";
 import {Dispatch, SetStateAction, useState} from "react";
 
 const bgColors = new Map()
-bgColors.set("sleep", "#C45AB3")
-bgColors.set("daily-activities", "#FF8811")
-bgColors.set("class", "#3A1772")
-bgColors.set("relaxing", "#B3001B")
-bgColors.set("study", "#018E42")
+bgColors.set("Sleep", "#C45AB3")
+bgColors.set("Food/Daily Activities", "#FF8811")
+bgColors.set("Class", "#3A1772")
+bgColors.set("Relaxing", "#B3001B")
+bgColors.set("Studying", "#018E42")
 
 const StyledAppointmentHOC = (p: {setEvents: Dispatch<SetStateAction<UserEvents[]>>}) => {
     const [dialogOpen, setDialogOpen] = useState(false)
@@ -45,7 +45,7 @@ const StyledAppointmentHOC = (p: {setEvents: Dispatch<SetStateAction<UserEvents[
 }
 
 
-export default function TimeSheet({events, onDoubleClick}: { events: Array<UserEvents>, onDoubleClick: () => void }) {
+export default function TimeSheet({events, setEvents}: { events: Array<UserEvents>, setEvents: Dispatch<SetStateAction<UserEvents[]>>}) {
     // const handleChange = (newValue: Dayjs | null) => {
     //     setValue(newValue);
     // };
@@ -59,7 +59,7 @@ export default function TimeSheet({events, onDoubleClick}: { events: Array<UserE
             {/*<DateNavigator rootComponent={undefined} overlayComponent={undefined} openButtonComponent={undefined} navigationButtonComponent={undefined}/>*/}
             <ViewState currentDate={date.curdate}/>
             <DayView startDayHour={6} endDayHour={22}/>
-            <Appointments appointmentComponent={StyledAppointmentHOC(onDoubleClick)}/>
+            <Appointments appointmentComponent={StyledAppointmentHOC({setEvents: setEvents})}/>
         </Scheduler>
     </Paper>
 };
