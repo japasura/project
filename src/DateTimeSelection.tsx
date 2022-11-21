@@ -3,7 +3,7 @@ import {Dispatch, SetStateAction} from 'react';
 import {Dayjs} from 'dayjs';
 import TextField from '@mui/material/TextField';
 import {TimePicker} from '@mui/x-date-pickers/TimePicker';
-import {DesktopDatePicker, LocalizationProvider} from "@mui/x-date-pickers";
+import {LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card'
@@ -25,13 +25,13 @@ export default function DateTimeSelection({
             <Grid container direction={"column"} maxWidth={"200px"} gap={2}>
                 <Typography>{label}</Typography>
 
-                <DesktopDatePicker
-                    label="Date"
-                    inputFormat="DD/MM/YYYY"
-                    value={value}
-                    onChange={handleChange}
-                    renderInput={(params: JSX.IntrinsicAttributes) => <TextField {...params} />}
-                />
+                {/*<DesktopDatePicker*/}
+                {/*    label="Date"*/}
+                {/*    inputFormat="DD/MM/YYYY"*/}
+                {/*    value={value}*/}
+                {/*    onChange={handleChange}*/}
+                {/*    renderInput={(params: JSX.IntrinsicAttributes) => <TextField {...params} />}*/}
+                {/*/>*/}
                 <TimePicker
                     label="Time"
                     value={value}
