@@ -5,11 +5,11 @@ import {Dispatch, SetStateAction, useState} from "react";
 import dayjs, {Dayjs} from "dayjs";
 import {UserEvents} from "./hooks/useEvents";
 
-export default function TimeTrackerControls({setEvents}: { setEvents: Dispatch<SetStateAction<UserEvents[]>> }) {
-    const [t1, setT1] = useState<Dayjs | null>(dayjs())
-    const [t2, setT2] = useState<Dayjs | null>(dayjs())
+export default function TimeTrackerControls({setEvents, initDate}: { setEvents: Dispatch<SetStateAction<UserEvents[]>>, initDate: string }) {
+    const [t1, setT1] = useState<Dayjs | null>(dayjs(initDate))
+    const [t2, setT2] = useState<Dayjs | null>(dayjs(initDate))
 
-    const [taskType, setTaskType] = useState("sleep")
+    const [taskType, setTaskType] = useState("Sleep")
 
     const changeTaskType = (e: SelectChangeEvent) => {
         setTaskType(e.target.value)
@@ -18,7 +18,7 @@ export default function TimeTrackerControls({setEvents}: { setEvents: Dispatch<S
     const cancel = () => {
         setT1(null)
         setT2(null)
-        setTaskType("sleep")
+        setTaskType("Sleep")
     }
 
     const submit = () => {
@@ -48,7 +48,6 @@ export default function TimeTrackerControls({setEvents}: { setEvents: Dispatch<S
                             label="Age"
                             value={taskType}
                             onChange={changeTaskType}
-                            defaultValue={"select task"}
                         >
                             <MenuItem value={"Sleep"}>Sleep</MenuItem>
                             <MenuItem value={"Food/Daily Activities"}>Food/Daily Activities</MenuItem>

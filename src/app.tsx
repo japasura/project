@@ -21,7 +21,7 @@ export default function App(props: { authToken: string }) {
             <TimeSheet setDate={setDate} curDate={date} events={schedulerData} setEvents={setSchedulerData}/>
         </Grid>
         <Grid sm={3}>
-            <TimeTrackerControls setEvents={setSchedulerData}/>
+            <TimeTrackerControls initDate={date} key={date} setEvents={setSchedulerData}/>
         </Grid>
     </Grid>
 }
