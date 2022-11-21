@@ -1,18 +1,17 @@
-import {ApiUserEvents, getDateString, UserEvents} from "./useEvents";
+import {ApiUserEvents, UserEvents} from "./useEvents";
 import {host} from "../index";
 import dayjs from "dayjs";
 
-export default function useSetEvents(authToken: string){
+export default function useSetEvents(authToken: string, d_str: string) {
     return async (events: UserEvents[]) => {
-        const serverEvents :ApiUserEvents[] = events.map(e => {
+        const serverEvents: ApiUserEvents[] = events.map(e => {
             return {
                 start_time: dayjs(e.startDate).unix(),
                 end_time: dayjs(e.endDate).unix(),
                 type: e.title
             }
         })
-        const d_str = getDateString(new Date())
-        const res = await fetch(host+"/dayData/" + d_str + "/events", {
+        const res = await fetch(host + "/dayData/" + d_str + "/events", {
             method: "POST",
             headers: {
                 "Api-Key": authToken,

@@ -17,10 +17,8 @@ export function getDateString(date: Date) {
     return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 }
 
-export default function useEvents(authToken: string){
+export default function useEvents(authToken: string, d_str: string){
     const [events, setEvents] = useState<Array<UserEvents>>([])
-    const date = new Date()
-    const d_str = getDateString(date);
     console.log()
     useEffect(()=> {
         fetch(host+"/dayData/" + d_str + "/events", {headers: {"Api-Key": authToken}}).then(resp => {

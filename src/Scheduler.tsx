@@ -1,13 +1,14 @@
 import * as React from 'react';
+import {Dispatch, SetStateAction, useState} from 'react';
 import Paper from '@mui/material/Paper';
-import {Appointments, DayView, Scheduler,} from '@devexpress/dx-react-scheduler-material-ui';
+import {Appointments, DayView, Scheduler, TodayButton} from '@devexpress/dx-react-scheduler-material-ui';
 import {getDateString, UserEvents} from "./hooks/useEvents";
-import {ViewState} from "@devexpress/dx-react-scheduler";
-import AppointmentProps = Appointments.AppointmentProps;
+import { Toolbar, DateNavigator } from '@devexpress/dx-react-scheduler-material-ui';
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import {Button, Dialog} from "@mui/material";
-import {Dispatch, SetStateAction, useState} from "react";
+import AppointmentProps = Appointments.AppointmentProps;
+import {ViewState} from "@devexpress/dx-react-scheduler";
 
 const bgColors = new Map()
 bgColors.set("Sleep", "#C45AB3")
@@ -16,7 +17,7 @@ bgColors.set("Class", "#3A1772")
 bgColors.set("Relaxing", "#B3001B")
 bgColors.set("Studying", "#018E42")
 
-const StyledAppointmentHOC = (p: {setEvents: Dispatch<SetStateAction<UserEvents[]>>}) => {
+const StyledAppointmentHOC = (p: { setEvents: Dispatch<SetStateAction<UserEvents[]>> }) => {
     const [dialogOpen, setDialogOpen] = useState(false)
     return (props: AppointmentProps) => {
         const curEvent = props.data
@@ -24,7 +25,7 @@ const StyledAppointmentHOC = (p: {setEvents: Dispatch<SetStateAction<UserEvents[
             p.setEvents(s => {
                 return s.filter(i => {
                     console.log(i)
-                    return  (i.title !== curEvent?.title || i.startDate !== curEvent.startDate || i.endDate !== curEvent.endDate)
+                    return (i.title !== curEvent?.title || i.startDate !== curEvent.startDate || i.endDate !== curEvent.endDate)
                 })
             })
             setDialogOpen(false)
@@ -44,20 +45,22 @@ const StyledAppointmentHOC = (p: {setEvents: Dispatch<SetStateAction<UserEvents[
     }
 }
 
+interface TimeSheetProps {
+    events: Array<UserEvents>,
+    setEvents: Dispatch<SetStateAction<UserEvents[]>>,
+    curDate: string,
+    setDate: Dispatch<SetStateAction<string>>
+}
 
-export default function TimeSheet({events, setEvents}: { events: Array<UserEvents>, setEvents: Dispatch<SetStateAction<UserEvents[]>>}) {
-    // const handleChange = (newValue: Dayjs | null) => {
-    //     setValue(newValue);
-    // };
-    const [date, setDate] = useState({curdate: getDateString(new Date())})
+export default function TimeSheet({events, setEvents, curDate, setDate}: TimeSheetProps) {
 
     return <Paper sx={{p: 2, overflowY: "scroll", maxHeight: "100vh"}}>
         <Scheduler data={events}>
+            <Toolbar/>
             {/*<DateNavigator navigationButtonComponent={}/>*/}
-            {/*<Date*/}
-            {/*<TodayButton buttonComponent={}/>*/}
-            {/*<DateNavigator rootComponent={undefined} overlayComponent={undefined} openButtonComponent={undefined} navigationButtonComponent={undefined}/>*/}
-            <ViewState currentDate={date.curdate}/>
+            <ViewState currentDate={curDate} onCurrentDateChange={(s) => {setDate(getDateString(s))}}/>
+            <DateNavigator/>
+            <TodayButton/>
             <DayView startDayHour={6} endDayHour={22}/>
             <Appointments appointmentComponent={StyledAppointmentHOC({setEvents: setEvents})}/>
         </Scheduler>
