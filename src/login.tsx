@@ -48,7 +48,7 @@ export default function Login(props: { authToken: string }) {
                     <TextField label={"Username"} name={"username"} onChange={onChange_1}/>
                 </Grid>
                 <Grid>
-                    <TextField label={"Password"} name={"password"} onChange={onChange_1}/>
+                    <TextField label={"Password"} type={"password"} name={"password"} onChange={onChange_1}/>
                 </Grid>
                 <Grid>
                     <Button onClick={onSubmit_1}>Login</Button>
@@ -60,7 +60,7 @@ export default function Login(props: { authToken: string }) {
                     <TextField label={"Username"} name={"username"} onChange={onChange_2}/>
                 </Grid>
                 <Grid>
-                    <TextField label={"Password"} name={"password"} onChange={onChange_2}/>
+                    <TextField label={"Password"} type={"password"} name={"password"} onChange={onChange_2}/>
                 </Grid>
                 <Grid>
                     <Button onClick={onSubmit_2}>Create Account</Button>
