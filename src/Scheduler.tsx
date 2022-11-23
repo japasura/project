@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography";
 import {Button, Dialog} from "@mui/material";
 import AppointmentProps = Appointments.AppointmentProps;
 import {ViewState} from "@devexpress/dx-react-scheduler";
+import useAnalytics from "./hooks/useAnalytics";
 
 const bgColors = new Map()
 bgColors.set("Sleep", "#C45AB3")
