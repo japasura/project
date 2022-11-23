@@ -22,9 +22,10 @@ export default function TimeTrackerControls({setEvents, initDate}: { setEvents: 
     }
 
     const submit = () => {
-        if(dayjs(t2)>dayjs())
-            alert("Time travel not possible")
-        else if(dayjs(t1)<dayjs(t2))
+        // if(dayjs(t2)>dayjs())
+        //     alert("Time travel not possible")
+        // else
+            if(dayjs(t1)<dayjs(t2))
             setEvents(e => {
             return [...e, {
                 startDate: t1?.toISOString() as string,

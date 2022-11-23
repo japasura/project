@@ -54,14 +54,14 @@ interface TimeSheetProps {
 
 export default function TimeSheet({events, setEvents, curDate, setDate}: TimeSheetProps) {
     const handleDateChange = (s: Date) => {
-        if (getDateString(s) <= getDateString(new Date())){
-            setDate(getDateString(s))
-        }
+        // if (getDateString(s) <= getDateString(new Date())){
+        //     setDate(getDateString(s))
+        // }
+        setDate(getDateString(s))
     }
     return <Paper sx={{p: 2, overflowY: "scroll", maxHeight: "100vh"}}>
         <Scheduler data={events}>
             <Toolbar/>
-            {/*<DateNavigator navigationButtonComponent={}/>*/}
             <ViewState currentDate={curDate} onCurrentDateChange={handleDateChange}/>
             <DateNavigator/>
             <TodayButton/>
