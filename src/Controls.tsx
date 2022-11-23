@@ -5,11 +5,11 @@ import {Dispatch, SetStateAction, useState} from "react";
 import dayjs, {Dayjs} from "dayjs";
 import {UserEvents} from "./hooks/useEvents";
 
-export default function TimeTrackerControls({setEvents}: { setEvents: Dispatch<SetStateAction<UserEvents[]>> }) {
-    const [t1, setT1] = useState<Dayjs | null>(dayjs())
-    const [t2, setT2] = useState<Dayjs | null>(dayjs())
+export default function TimeTrackerControls({setEvents, initDate}: { setEvents: Dispatch<SetStateAction<UserEvents[]>>, initDate: string }) {
+    const [t1, setT1] = useState<Dayjs | null>(dayjs(initDate))
+    const [t2, setT2] = useState<Dayjs | null>(dayjs(initDate))
 
-    const [taskType, setTaskType] = useState("sleep")
+    const [taskType, setTaskType] = useState("Sleep")
 
     const changeTaskType = (e: SelectChangeEvent) => {
         setTaskType(e.target.value)
@@ -18,17 +18,23 @@ export default function TimeTrackerControls({setEvents}: { setEvents: Dispatch<S
     const cancel = () => {
         setT1(null)
         setT2(null)
-        setTaskType("sleep")
+        setTaskType("Sleep")
     }
 
     const submit = () => {
-        setEvents(e => {
+        // if(dayjs(t2)>dayjs())
+        //     alert("Time travel not possible")
+        // else
+            if(dayjs(t1)<dayjs(t2))
+            setEvents(e => {
             return [...e, {
                 startDate: t1?.toISOString() as string,
                 endDate: t2?.toISOString() as string,
                 title: taskType
             }]
         })
+        else
+            alert("To succeed you must start (End time lesser than start time)")
     }
 
     return <Box sx={{position: "sticky"}}>
@@ -44,11 +50,11 @@ export default function TimeTrackerControls({setEvents}: { setEvents: Dispatch<S
                             value={taskType}
                             onChange={changeTaskType}
                         >
-                            <MenuItem value={"sleep"}>Sleep</MenuItem>
-                            <MenuItem value={"daily-activities"}>Food/Daily Activities</MenuItem>
-                            <MenuItem value={"class"}>Class</MenuItem>
-                            <MenuItem value={"relaxing"}>Relaxing</MenuItem>
-                            <MenuItem value={"study"}>Studying</MenuItem>
+                            <MenuItem value={"Sleep"}>Sleep</MenuItem>
+                            <MenuItem value={"Food/Daily Activities"}>Food/Daily Activities</MenuItem>
+                            <MenuItem value={"Class"}>Class</MenuItem>
+                            <MenuItem value={"Relaxing"}>Relaxing</MenuItem>
+                            <MenuItem value={"Studying"}>Studying</MenuItem>
                         </Select>
                     </FormControl>
                 </Grid>
