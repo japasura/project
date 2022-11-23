@@ -5,7 +5,7 @@ import {Dispatch, SetStateAction, useState} from "react";
 import dayjs, {Dayjs} from "dayjs";
 import {UserEvents} from "./hooks/useEvents";
 
-export default function TimeTrackerControls({setEvents, initDate}: { setEvents: Dispatch<SetStateAction<UserEvents[]>>, initDate: string }) {
+export default function TimeTrackerControls({setEvents, initDate, updateEvents}: { setEvents: Dispatch<SetStateAction<UserEvents[]>>, initDate: string, updateEvents: (_: UserEvents[]) => void }) {
     const [t1, setT1] = useState<Dayjs | null>(dayjs(initDate))
     const [t2, setT2] = useState<Dayjs | null>(dayjs(initDate))
 
@@ -27,12 +27,14 @@ export default function TimeTrackerControls({setEvents, initDate}: { setEvents: 
         // else
             if(dayjs(t1)<dayjs(t2))
             setEvents(e => {
-            return [...e, {
+            const sv =  [...e, {
                 startDate: t1?.toISOString() as string,
                 endDate: t2?.toISOString() as string,
                 title: taskType
             }]
-        })
+                updateEvents(sv)
+            return sv
+            })
         else
             alert("To succeed you must start (End time lesser than start time)")
     }

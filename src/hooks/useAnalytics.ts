@@ -13,10 +13,10 @@ export default function useAnalytics(authToken: string, startDate: string) {
 
     useEffect(() => {
         fetch(host + "/analytics", {
-            method: "POST",
-            body: JSON.stringify({
-                start_date: startDate,
-                end_date: getDateString(new Date())
+            method: "POST", headers: {
+                "Api-Key": authToken, "Content-Type": "application/json"
+            }, body: JSON.stringify({
+                start_date: startDate, end_date: getDateString(new Date())
             })
         }).then(r => {
             r.json().then(data => {
