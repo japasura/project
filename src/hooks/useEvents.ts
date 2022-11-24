@@ -19,7 +19,7 @@ export function getDateString(date: Date) {
 
 export default function useEvents(authToken: string, d_str: string){
     const [events, setEvents] = useState<Array<UserEvents>>([])
-    console.log()
+    const [error, setError] = useState(false)
     useEffect(()=> {
         fetch(host+"/dayData/" + d_str + "/events", {headers: {"Api-Key": authToken}}).then(resp => {
             if (resp.ok){
@@ -33,12 +33,13 @@ export default function useEvents(authToken: string, d_str: string){
                             title: s.type
                         }
                     })
-                    console.log(sv)
                     setEvents(sv)
                 })
             }
 
+        }).catch(r => {
+            setError(true)
         })
     }, [authToken, d_str])
-    return {events, setEvents}
+    return {error, events, setEvents}
 }
